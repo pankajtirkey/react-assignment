@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container } from '@material-ui/core';
+
 import MenuBar from '../../components/Navigation/MenuBar/MenuBar';
+import Footer from '../../components/Navigation/Footer/Footer';
 
 const Layout = (props) => (
   <>
     <MenuBar />
-    {props.children}
-    <h1>Footer</h1>
+    <Container>{props.children}</Container>
+    <Footer />
   </>
 );
 
