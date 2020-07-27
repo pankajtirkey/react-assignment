@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MenuBar from '../../components/Navigation/MenuBar/MenuBar';
 
 const Layout = (props) => (
   <>
-    <h1>Navigation Bar</h1>
+    <MenuBar />
     {props.children}
     <h1>Footer</h1>
   </>
