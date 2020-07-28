@@ -18,5 +18,8 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "#1857a4",
-  "files.associations": { "*.js": "javascriptreact" }
+  "files.associations": {
+    "*.js": "javascriptreact"
+  },
+  "editor.wordWrapColumn": 120
 }
