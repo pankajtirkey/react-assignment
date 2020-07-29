@@ -1,6 +1,6 @@
 # react-assignment
 
-React Assignment as part of React/Redux training @VC
+React Assignment as part of React/Redux training @VC by Pankaj Nelson Tirkey
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
