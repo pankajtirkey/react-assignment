@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button, TextField } from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+// import { debounce } from 'lodash';
+
+import * as actionTypes from '../../store/actions';
 
 class Form extends Component {
   state = {
@@ -99,6 +105,12 @@ class Form extends Component {
       const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       isValid = pattern.test(value);
     }
+    if (rules && rules.min) {
+      isValid = value >= rules.min && isValid;
+    }
+    if (rules && rules.max) {
+      isValid = value <= rules.max && isValid;
+    }
     return isValid;
   };
 
@@ -108,7 +120,9 @@ class Form extends Component {
     for (let key in this.state.formData) {
       formData[key] = this.state.formData[key].value;
     }
-    console.log(formData);
+    // console.log(formData);
+    this.props.onSubmitForm(formData);
+    this.props.history.push('/view');
   };
 
   render() {
@@ -129,7 +143,12 @@ class Form extends Component {
           fullWidth
           multiline={formElement.type === 'textarea' ? true : false}
           rowsMax={formElement.type === 'textarea' ? 3 : null}
-          style={{ marginTop: '5px', marginBottom: '5px' }}
+          style={{
+            marginTop: '5px',
+            marginBottom: '5px',
+            backgroundColor:
+              formElement.touched && !formElement.valid ? 'salmon' : 'white'
+          }}
         />
       );
     });
@@ -153,4 +172,16 @@ class Form extends Component {
   }
 }
 
-export default Form;
+Form.propTypes = {
+  history: PropTypes.object,
+  onSubmitForm: PropTypes.func
+};
+
+const mapStateToProps = (state) => ({ formData: state.formData });
+
+const mapDispatchToProps = (dispatch) => ({
+  onSubmitForm: (formdata) =>
+    dispatch({ type: actionTypes.SAVE_FORM, payload: formdata })
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Form));

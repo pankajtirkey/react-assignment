@@ -1,8 +1,11 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 const HomePage = () => (
   <>
-    <h1>Home Page</h1>
+    <Typography variant='h4' style={{ marginTop: '16px' }}>
+      Please share your data on the form page.
+    </Typography>
   </>
 );
 
